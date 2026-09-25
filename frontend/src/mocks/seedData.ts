@@ -6,7 +6,12 @@ export const mockData = {
       "version_label": "version label 1",
       "raw_text": "raw text 1",
       "normalized_sections": "normalized sections 1",
-      "imported_at": "2026-06-11T09:00:00Z"
+      "imported_at": "2026-06-11T09:00:00Z",
+      "status": "ACTIVE",
+      "archived_by": null,
+      "archived_at": null,
+      "restored_by": null,
+      "restored_at": null
     },
     {
       "id": 2,
@@ -14,7 +19,12 @@ export const mockData = {
       "version_label": "version label 2",
       "raw_text": "raw text 2",
       "normalized_sections": "normalized sections 2",
-      "imported_at": "2026-06-12T09:00:00Z"
+      "imported_at": "2026-06-12T09:00:00Z",
+      "status": "ACTIVE",
+      "archived_by": null,
+      "archived_at": null,
+      "restored_by": null,
+      "restored_at": null
     },
     {
       "id": 3,
@@ -22,7 +32,38 @@ export const mockData = {
       "version_label": "version label 3",
       "raw_text": "raw text 3",
       "normalized_sections": "normalized sections 3",
-      "imported_at": "2026-06-13T09:00:00Z"
+      "imported_at": "2026-06-13T09:00:00Z",
+      "status": "ACTIVE",
+      "archived_by": null,
+      "archived_at": null,
+      "restored_by": null,
+      "restored_at": null
+    },
+    {
+      "id": 4,
+      "title": "title 4",
+      "version_label": "version label 4",
+      "raw_text": "raw text 4",
+      "normalized_sections": "normalized sections 4",
+      "imported_at": "2026-06-14T09:00:00Z",
+      "status": "ACTIVE",
+      "archived_by": null,
+      "archived_at": null,
+      "restored_by": null,
+      "restored_at": null
+    },
+    {
+      "id": 5,
+      "title": "title 2",
+      "version_label": "version label 2 (archived)",
+      "raw_text": "raw text 5",
+      "normalized_sections": "normalized sections 5",
+      "imported_at": "2026-06-10T09:00:00Z",
+      "status": "ARCHIVED",
+      "archived_by": "reviewer 1",
+      "archived_at": "2026-06-15T09:00:00Z",
+      "restored_by": null,
+      "restored_at": null
     }
   ],
   "policySection": [
@@ -52,6 +93,15 @@ export const mockData = {
       "content": "content 3",
       "category": "MOVED",
       "risk_level": "HIGH"
+    },
+    {
+      "id": 4,
+      "document_id": 5,
+      "section_no": "section no 4",
+      "heading": "heading 4",
+      "content": "content 4",
+      "category": "ADDED",
+      "risk_level": "CRITICAL"
     }
   ],
   "diffResult": [
@@ -81,6 +131,15 @@ export const mockData = {
       "diff_type": "MOVED",
       "summary": "summary 3",
       "created_at": "2026-06-13T09:00:00Z"
+    },
+    {
+      "id": 4,
+      "old_document_id": 5,
+      "new_document_id": 2,
+      "section_id": 4,
+      "diff_type": "MODIFIED",
+      "summary": "summary 4",
+      "created_at": "2026-06-14T09:00:00Z"
     }
   ],
   "reviewNote": [
@@ -107,6 +166,14 @@ export const mockData = {
       "comment": "comment 3",
       "reviewer": "reviewer 3",
       "status": "OPEN"
+    },
+    {
+      "id": 4,
+      "diff_result_id": 4,
+      "tag": "tag 4",
+      "comment": "comment 4",
+      "reviewer": "reviewer 1",
+      "status": "RESOLVED"
     }
   ]
 } as const;

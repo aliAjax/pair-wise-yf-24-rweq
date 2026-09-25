@@ -53,6 +53,14 @@ frontend/src/api, stores, types, constants, constructors, components/common, hoo
 - DiffType: constants/DiffType、types/DiffType、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
 - PrivacyRiskLevel: constants/PrivacyRiskLevel、types/PrivacyRiskLevel、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
 - ReviewStatus: constants/ReviewStatus、types/ReviewStatus、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
+- DocumentStatus: constants/DocumentStatus、types/DocumentStatus、statusText、logTemplates、errorMessages、formatters（formatDocumentStatus）、PolicyDocumentStore、DocumentsPage/ComparePage 列表与筛选均有引用。
+
+## 版本归档与恢复
+
+- 政策文档带 `status`（ACTIVE/ARCHIVED）与 `archived_by/archived_at/restored_by/restored_at` 审计字段，处理人来自文档库页面的「处理人」输入。
+- 有历史关联（差异、条款风险、审阅备注）的版本撤下后保留为归档：不参与新对比，历史结果仍可打开，内容只读且可导出 Markdown。
+- 恢复时若活动列表已存在同名政策，按 `DUPLICATE_ACTIVE_TITLE` 拦截并提示先处理该记录；无关联记录的版本可彻底删除。
+- 归档状态持久化在 localStorage（键 `policy-diff:policy-document:v1`），首次访问自动写入种子数据。
 
 ## 为什么会牵一发动全身
 

@@ -1,12 +1,20 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { routes } from "./router/routes";
-import { mockData } from "./mocks/seedData";
+import { usePolicyDocumentStore } from "./stores/PolicyDocumentStore";
 import StatusBadge from "./components/common/StatusBadge.vue";
 import StatCard from "./components/common/StatCard.vue";
-const active = ref<string>(routes[0]?.route ?? "/dashboard");
+import DocumentsPage from "./pages/DocumentsPage.vue";
+import ComparePage from "./pages/ComparePage.vue";
+import RisksPage from "./pages/RisksPage.vue";
+import ReviewPage from "./pages/ReviewPage.vue";
+
+const pages = { "/documents": DocumentsPage, "/compare": ComparePage, "/risks": RisksPage, "/review": ReviewPage } as const;
+const active = ref<string>(routes[0]?.route ?? "/documents");
 const current = computed(() => routes.find((route) => route.route === active.value) ?? routes[0]);
-const entries = Object.entries(mockData);
+const currentPage = computed(() => pages[active.value as keyof typeof pages] ?? DocumentsPage);
+const documentStore = usePolicyDocumentStore();
+onMounted(() => { void documentStore.load(); });
 </script>
 
 <template>
@@ -19,8 +27,8 @@ const entries = Object.entries(mockData);
     </aside>
     <main class="page">
       <section class="page-head"><div><p class="eyebrow">policy-diff</p><h1>{{ current?.name }}</h1></div><StatusBadge value="LOCAL_DATA" /></section>
-      <section class="metrics"><StatCard label="核心模型" :value="entries.length" /><StatCard label="共享枚举" :value="3" /><StatCard label="本地记录" :value="entries.reduce((s, [, rows]) => s + rows.length, 0)" /></section>
-      <section class="workbench"><div class="panel wide"><h2>业务数据</h2><article class="row" v-for="[key, rows] in entries" :key="key"><strong>{{ key }}</strong><span>{{ rows.length }} 条</span><StatusBadge value="READY" /></article></div><div class="panel"><h2>联动检查</h2><p>页面、store、API、构造器、日志模板和枚举常量均按提示词拆分。</p></div></section>
+      <section class="metrics"><StatCard label="活动版本" :value="documentStore.activeCount" /><StatCard label="已归档" :value="documentStore.archivedCount" /><StatCard label="版本总数" :value="documentStore.rows.length" /></section>
+      <component :is="currentPage" />
     </main>
   </div>
 </template>
