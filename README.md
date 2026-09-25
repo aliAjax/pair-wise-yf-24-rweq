@@ -53,6 +53,14 @@ frontend/src/api, stores, types, constants, constructors, components/common, hoo
 - DiffType: constants/DiffType、types/DiffType、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
 - PrivacyRiskLevel: constants/PrivacyRiskLevel、types/PrivacyRiskLevel、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
 - ReviewStatus: constants/ReviewStatus、types/ReviewStatus、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
+- DocumentLifecycleStatus: constants/DocumentLifecycleStatus、types/DocumentLifecycleStatus、constructors/PolicyDocumentConstructor、statusText、utils/formatters、PolicyDocumentStore、DocumentsPage、ComparePage、seedData 均有引用。
+
+## 版本归档与恢复
+
+- 撤下有历史关联（差异、风险条款、审阅备注）的版本时保留为归档：归档版本不再参与新对比，已有结果仍可打开，内容只读并支持导出 Markdown。
+- 恢复进活动列表时校验同名：活动列表已存在同名政策则提示先处理那份记录，两份同名政策不允许同时出现。
+- 无关联记录的版本可彻底清理；有关联记录的版本禁止彻底清理，仅可归档保留。
+- 文档导入页分开统计活动与归档数量，归档/恢复均记录处理人与时间（localStorage 持久化）。
 
 ## 为什么会牵一发动全身
 

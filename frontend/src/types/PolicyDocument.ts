@@ -1,3 +1,5 @@
+import type { DocumentLifecycleStatus } from "./DocumentLifecycleStatus";
+
 export interface PolicyDocument {
   id: number;
   title: string;
@@ -5,4 +7,9 @@ export interface PolicyDocument {
   raw_text: string;
   normalized_sections: string;
   imported_at: string;
+  lifecycle_status: DocumentLifecycleStatus;
+  archived_at: string | null;
+  archived_by: string | null;
+  restored_at: string | null;
+  restored_by: string | null;
 }

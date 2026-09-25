@@ -7,6 +7,11 @@ export const createDefaultPolicyDocument = (overrides: Partial<PolicyDocument> =
   raw_text: "raw text 1" as never,
   normalized_sections: "normalized sections 1" as never,
   imported_at: "2026-06-11T09:00:00Z" as never,
+  lifecycle_status: "ACTIVE" as never,
+  archived_at: null as never,
+  archived_by: null as never,
+  restored_at: null as never,
+  restored_by: null as never,
   ...overrides
 });
 
